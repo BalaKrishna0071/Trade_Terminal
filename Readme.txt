@@ -1,59 +1,128 @@
-Project Name = Trade_Terminal 
+Here is a well-structured `README.md` for your project:
 
-TeckStack := 
+```markdown
+# Trade Terminal
 
-			1) Go
-			2) Redis 
-			3) KiteConnect API 
-			 
+## Project Overview
 
-Module Package :=
+**Trade Terminal** is a real-time financial data terminal that connects to the Zerodha KiteConnect API for streaming data. It handles instrument token generation, data subscription, storage in Redis, and WebSocket connections to provide live market data. The system also includes logging capabilities, and data is organized and stored for easy access and monitoring.
 
-	            1) instrument 
-            	2) redis_cache
-                3) token_management
-            	4) websocket
-	            5) loggers
+## Tech Stack
 
-Libraries :=
+- **Go**: The primary programming language used for the implementation of the project.
+- **Redis**: Used as a cache to store instrument data and quotes.
+- **KiteConnect API**: Utilized for accessing market data from Zerodha.
 
-			1) godotenv
-			2) zerodha models
-			3) zerodha ticker
-			4) go-redis
-			5) Air 
-			6) Logrus
-			7) rotateslog
+## Modules & Packages
 
-Files :=
+1. **instrument**: Manages the instruments and their tokens.
+2. **redis_cache**: Handles Redis connections and data storage.
+3. **token_management**: Manages instrument token generation and filtering.
+4. **websocket**: Subscribes and listens to live market data.
+5. **loggers**: Handles logging and log file management.
 
-		1) instrument_mgmt
-		2) loggers
-		3) redis_cache
-		4) build-error
-		5) token_mgmt
-		6) zerodha_ws
-		7) Readme
-		8) test_instrument
-		9) test_redis
-		10) test_websocket
-		11) .env
+## Libraries
 
-Steps :=
+- **godotenv**: Loads environment variables from `.env` file.
+- **zerodha models**: Data models from Zerodha for handling market data.
+- **zerodha ticker**: For subscribing to and receiving live market tick data.
+- **go-redis**: Redis client for Go.
+- **Air**: For environment-based configuration and management.
+- **Logrus**: Structured logger for Go.
+- **rotateslog**: Handles log file rotation.
 
-   1 ) creating .env file for storing Credentials api keys , secret key, access token .
-   2 ) instrument token generation .
-   3 ) filtering instrument according to the NIFTY, BANKNIFTY, FINNIFTY .
-   4 ) Filter all options and indices and store in a array, including all three instruments .
-   5 ) subscribe to the zerodha of this array .
-   6 ) making redis connection for storing incoming Quotes .
-   7 ) making websocket connection .
-   8 ) storing instrument data in redis based key n value where key is instrumentToken and value is Lastprice .
-   9 ) converted string into json and stored in redis , full details of particular stock .
-   10) retrieving all stocks along with options and indices and merging into array and updating into redis .
-   11) creating a func for getting all the a) NiftContract b) BankNiftyContract c) FinNiftyContract including Options and Indices .
-   12) in redis key is instrumentSymbol and other details of it .
-   13) adding loggers for login info, error, warning etc .  
-   14) implementing loggers using logrus package  .
-   15) implementing file rotation using rotation using rotateslog package .
-   16) file rotation like after 7 days log file will be deleted and within 5 min new file will be created for storing log .
+## Files
+
+1. **instrument_mgmt**: Logic related to managing and generating instrument tokens.
+2. **loggers**: Contains logging configurations and log generation.
+3. **redis_cache**: Implements Redis connection and operations.
+4. **build-error**: Logs build-related errors.
+5. **token_mgmt**: Manages token generation and filtering for instruments.
+6. **zerodha_ws**: WebSocket connection and management for Zerodha.
+7. **Readme**: This file.
+8. **test_instrument**: Unit tests for the instrument module.
+9. **test_redis**: Unit tests for Redis caching.
+10. **test_websocket**: Unit tests for WebSocket communication.
+11. **.env**: Stores sensitive credentials (API keys, tokens, etc.).
+
+## Key Steps for Implementation
+
+1. **Creating `.env` File**: Store sensitive credentials such as API keys, secret keys, and access tokens.
+2. **Instrument Token Generation**: Generate tokens for market instruments such as NIFTY, BANKNIFTY, and FINNIFTY.
+3. **Instrument Filtering**: Filter instruments based on specific criteria (e.g., NIFTY, BANKNIFTY, FINNIFTY).
+4. **Instrument Array Creation**: Create an array with filtered instruments, including options and indices.
+5. **Subscription to Zerodha API**: Subscribe to Zerodha’s live market data for the filtered instrument array.
+6. **Redis Connection**: Establish a connection to Redis for storing incoming market quotes.
+7. **WebSocket Connection**: Set up WebSocket connection to listen for live data from Zerodha.
+8. **Data Storage in Redis**: Store instrument data in Redis, where the key is the instrument token and the value is the last price.
+9. **Storing Detailed Instrument Data**: Convert data to JSON format and store it in Redis for easy retrieval.
+10. **Retrieving Stock Data**: Retrieve data for all instruments (stocks, options, and indices), merge them into an array, and update Redis.
+11. **Instrument Contract Retrieval**: Create functions to retrieve data for:
+    - Nifty Contract
+    - BankNifty Contract
+    - FinNifty Contract (including options and indices).
+12. **Redis Key Management**: Use instrument symbols as keys in Redis, storing related details.
+13. **Logging**: Implement logging for information, errors, and warnings.
+14. **Logrus Integration**: Integrate Logrus for structured logging.
+15. **File Rotation**: Implement file rotation using `rotateslog`:
+    - Log files will be deleted after 7 days.
+    - A new log file will be created every 5 minutes for storing log data.
+
+## Installation & Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository_url>
+   cd trade_terminal
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   go get -u github.com/joho/godotenv
+   go get -u github.com/zerodhatech/gokiteconnect
+   go get -u github.com/go-redis/redis/v8
+   go get -u github.com/sirupsen/logrus
+   go get -u github.com/natefinch/atomic
+   ```
+
+3. Set up the `.env` file with your credentials (API keys, access token, etc.):
+
+   ```
+   KITE_API_KEY=<your_api_key>
+   KITE_API_SECRET=<your_api_secret>
+   KITE_ACCESS_TOKEN=<your_access_token>
+   REDIS_HOST=<your_redis_host>
+   REDIS_PORT=<your_redis_port>
+   ```
+
+4. Run the application:
+
+   ```bash
+   go run main.go
+   ```
+
+## Testing
+
+The project includes unit tests for different modules. To run the tests, use the following command:
+
+```bash
+go test -v
+```
+
+## Logs & Monitoring
+
+- Logs will be stored in log files, with rotation every 5 minutes and deletion after 7 days.
+- Log levels include INFO, ERROR, and WARNING for different types of events.
+
+## Contributing
+
+Feel free to submit a pull request or open an issue if you find a bug or want to contribute new features!
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
+
+This should provide clear documentation for your project. Let me know if you need any adjustments or additions!
