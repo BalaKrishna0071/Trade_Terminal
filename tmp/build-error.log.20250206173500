@@ -1,0 +1,11 @@
+[36mINFO[0m[2025-06-25 17:35:39][test_websocket.go:90] API Key : qtxhyukhjqule301                   
+[36mINFO[0m[2025-06-25 17:35:39][test_websocket.go:94] Access Token : YWUePojNhWyPktOmIL98Q3wOKZaQPnQI 
+[36mINFO[0m[2025-06-25 17:35:39][test_websocket.go:19] Websocket Connected....                      
+[36mINFO[0m[2025-06-25 17:35:39][test_websocket.go:27] API Key : qtxhyukhjqule301                   
+[36mINFO[0m[2025-06-25 17:35:51][test_websocket.go:64] Length : 703                                 
+[36mINFO[0m[2025-06-25 17:36:04][redis_util.go:35] Redis Connected...                           
+[31mERRO[0m[2025-06-25 17:36:04][zerodha_ws.go:29] Websocket Closed Due to : Error reading data: read tcp 192.168.0.105:53421->3.111.229.140:443: use of closed network connection 
+[31mERRO[0m[2025-06-25 17:36:04][zerodha_ws.go:107] Reconnect Attempt : 1 2s                     
+[36mINFO[0m[2025-06-25 17:36:06][test_websocket.go:19] Websocket Connected....                      
+[36mINFO[0m[2025-06-25 17:36:06][test_websocket.go:27] API Key : qtxhyukhjqule301                   
+[36mINFO[0m[2025-06-25 17:36:18][test_websocket.go:64] Length : 703                                 
